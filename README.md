@@ -1,783 +1,630 @@
-# 🏢 Company Research Assistant# 🏢 Company Research Assistant# 🏢 Company Research Assistant# Company Research Assistant (Account Plan Generator)
+# 🏢 Company Research Assistant
 
+> An intelligent AI-powered assistant that helps you research companies and generate comprehensive B2B account plans through natural conversation.
 
+[![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![Groq](https://img.shields.io/badge/Groq-000000?style=for-the-badge&logo=ai&logoColor=white)](https://groq.com/)
+[![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 
-An AI-powered research assistant that helps you create comprehensive account plans through natural conversation. Built with **Groq AI** (Llama 3.3 70B) and **Streamlit**.
+---
 
+## 📋 Table of Contents
 
+- [Overview](#-overview)
+- [Features](#-features)
+- [Architecture](#-architecture)
+- [Installation](#-installation)
+- [Configuration](#-configuration)
+- [Usage](#-usage)
+- [Project Structure](#-project-structure)
+- [Technologies](#-technologies)
+- [API Information](#-api-information)
+- [Contributing](#-contributing)
 
----An AI-powered research assistant that helps you create comprehensive account plans through natural conversation. Built with **Groq AI** (Llama 3.3 70B) and **Streamlit**.
+---
 
+## 🎯 Overview
 
+The **Company Research Assistant** is a powerful tool designed for B2B sales teams, business development professionals, and account managers. It leverages advanced AI (Groq's Llama 3.3 70B model) to conduct comprehensive company research and generate structured account plans through an intuitive conversational interface.
+
+### Key Capabilities
+
+- **Intelligent Company Research**: Gathers business intelligence based on AI knowledge
+- **Conversational Interface**: Natural dialogue with context-aware responses
+- **Structured Account Plans**: Generates professional 10-section account plans
+- **Interactive Editing**: Edit and enhance any section of the generated plan
+- **Voice Interaction**: Speech-to-text input and text-to-speech output support
+- **Export Options**: Download plans in JSON or formatted text
+
+---
 
 ## ✨ Features
 
+### 💬 Intelligent Conversation
+- Natural language understanding with context awareness
+- Clarifying questions for better research outcomes
+- Chat history preservation throughout the session
 
+### 📊 Account Plan Generation
+- **10 comprehensive sections:**
+  1. Executive Summary
+  2. Company Overview
+  3. Business Model & Products/Services
+  4. Market Position & Competitors
+  5. Recent News & Strategic Initiatives
+  6. Key Stakeholders & Decision Makers
+  7. Pain Points & Challenges
+  8. Opportunities & Recommendations
+  9. Engagement Strategy
+  10. Next Steps
 
-- **💬 Intelligent Conversation** - Natural dialogue with context awareness---An AI-powered research assistant that helps you create comprehensive account plans through natural conversation. Built with **Groq AI** (Llama 3.3 70B) and **Streamlit**.An intelligent AI-powered assistant that helps users research companies through natural conversation and generate comprehensive account plans. Built with Google Gemini AI with Google Search grounding and Streamlit.
+### ✏️ Editable Sections
+- In-line text editors for each section
+- Real-time updates to account plans
+- Preserve custom edits
 
-- **📊 Account Plan Generation** - Structured 10-section professional plans
+### 🤖 AI Enhancement
+- One-click AI improvement for individual sections
+- Maintain professional business tone
+- Add more detail and actionable insights
 
-- **✏️ Editable Sections** - Update any section with built-in editors
+### 🎤 Voice Interaction
+- Browser-based speech recognition (Chrome, Edge, Safari)
+- Text-to-speech output for AI responses
+- Real-time transcription to chat input
 
-- **🤖 AI Enhancement** - One-click AI improvement for each section
+### 📥 Export Options
+- **JSON Format**: Structured data export
+- **Text Format**: Formatted professional document
+- Timestamped exports
 
-- **🎤 Voice Interaction** - Speech-to-text input and text-to-speech output## ✨ Features
+### 📝 Research Notes
+- Real-time activity tracking
+- Timestamped research actions
+- Session history sidebar
 
-- **📥 Export Options** - Download as JSON or formatted text
+---
 
-- **⚡ Fast & Free** - Powered by Groq's lightning-fast API (14,400 requests/day free)
+## 🏗️ Architecture
 
+### System Architecture
 
+```
+┌─────────────────────────────────────────────────────────────┐
+│                     User Interface Layer                     │
+│                    (Streamlit Frontend)                      │
+├─────────────────────────────────────────────────────────────┤
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐     │
+│  │   Chat UI    │  │  Account     │  │   Voice      │     │
+│  │              │  │  Plan View   │  │   Input      │     │
+│  └──────────────┘  └──────────────┘  └──────────────┘     │
+└─────────────────────────────────────────────────────────────┘
+                            │
+                            ▼
+┌─────────────────────────────────────────────────────────────┐
+│                    Application Logic Layer                   │
+│                      (Python Backend)                        │
+├─────────────────────────────────────────────────────────────┤
+│  ┌──────────────────────────────────────────────────────┐  │
+│  │            Session State Management                   │  │
+│  │  - Messages  - Account Plans  - Research Notes       │  │
+│  └──────────────────────────────────────────────────────┘  │
+│  ┌──────────────────────────────────────────────────────┐  │
+│  │              Business Logic Functions                 │  │
+│  │  - Parse Plans  - Enhance Sections  - Export Data    │  │
+│  └──────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────┘
+                            │
+                            ▼
+┌─────────────────────────────────────────────────────────────┐
+│                      API Integration Layer                   │
+├─────────────────────────────────────────────────────────────┤
+│                      Groq API Client                         │
+│                 (Llama 3.3 70B Versatile)                   │
+└─────────────────────────────────────────────────────────────┘
+```
 
----- **💬 Intelligent Conversation** - Natural dialogue with context awareness## ✨ Features## 🎯 Features
+### Component Flow
 
+```
+┌──────────┐     ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+│  User    │────▶│   Streamlit  │────▶│   Business   │────▶│   Groq API   │
+│  Input   │     │   Frontend   │     │    Logic     │     │   (LLM)      │
+└──────────┘     └──────────────┘     └──────────────┘     └──────────────┘
+                        │                     │                     │
+                        ▼                     ▼                     ▼
+                 ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+                 │   Session    │     │   Parse &    │     │   AI Model   │
+                 │    State     │     │   Format     │     │  Response    │
+                 └──────────────┘     └──────────────┘     └──────────────┘
+                        │                     │                     │
+                        └─────────────────────┴─────────────────────┘
+                                         │
+                                         ▼
+                                  ┌──────────────┐
+                                  │  Generated   │
+                                  │ Account Plan │
+                                  └──────────────┘
+```
 
+### Data Flow
 
-## 🚀 Quick Start- **📊 Account Plan Generation** - Structured 10-section professional plans
+1. **User Input** → Captured via chat or voice interface
+2. **Context Building** → Combined with chat history and system prompt
+3. **API Call** → Sent to Groq API with Llama 3.3 70B model
+4. **Response Processing** → Parsed and structured into sections
+5. **State Management** → Stored in Streamlit session state
+6. **UI Rendering** → Displayed in tabs with editing capabilities
+7. **Export** → Formatted for download in JSON or text format
 
+---
 
+## 🚀 Installation
 
-### 1. Install Dependencies- **✏️ Editable Sections** - Update any section with built-in editors
+### Prerequisites
 
+- **Python 3.8 or higher**
+- **Groq API Key** (Free tier available)
+- Modern web browser (Chrome, Edge, or Safari for voice features)
 
+### Step 1: Clone or Download the Project
 
-```bash- **🤖 AI Enhancement** - One-click AI improvement for each section
+```bash
+# If using git
+git clone <repository-url>
+cd eightfold
 
+# Or simply navigate to the project directory
+cd /path/to/eightfold
+```
+
+### Step 2: Install Dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
-```- **🎤 Voice Interaction** - Speech-to-text input and text-to-speech output- **💬 Intelligent Conversation** - Natural dialogue with context awareness### Core Capabilities
+**Required packages:**
+- `streamlit>=1.28.0` - Web application framework
+- `groq>=0.4.0` - Groq API client
+- `python-dotenv>=1.0.0` - Environment variable management
+- `sounddevice>=0.4.6` - Audio device support
+- `soundfile>=0.12.1` - Audio file I/O
+- `numpy>=1.24.0` - Numerical computing
 
+---
 
+## ⚙️ Configuration
 
-### 2. Set Up API Key- **📥 Export Options** - Download as JSON or formatted text
+### Environment Setup
 
-
-
-Create a `.env` file:- **⚡ Fast & Free** - Powered by Groq's lightning-fast API (14,400 requests/day free)- **📊 Account Plan Generation** - Structured 10-section professional plans- **✅ Multi-Source Research**: Gathers information using **Google Search grounding** for real-time, accurate data from multiple sources
-
-
+Create a `.env` file in the project root:
 
 ```bash
-
 GROQ_API_KEY=your_groq_api_key_here
+```
 
-```---- **✏️ Editable Sections** - Update any section with built-in editors- **✅ Interactive Conversation**: Natural dialogue with context awareness
+### Get Your Free Groq API Key
 
+1. Visit **[https://console.groq.com/](https://console.groq.com/)**
+2. Sign up for a free account
+3. Navigate to API Keys section
+4. Create a new API key
+5. Copy and paste into your `.env` file
 
+**Free Tier Limits:**
+- 14,400 requests per day
+- Extremely fast inference speeds
+- No credit card required
 
-Get your free API key at: **[https://console.groq.com/](https://console.groq.com/)**
+---
 
+## 💻 Usage
 
+### Starting the Application
 
-### 3. Run the App## 🚀 Quick Start- **🤖 AI Enhancement** - One-click AI improvement for each section- **✅ Progress Updates**: Provides real-time research status and asks clarifying questions during research
-
-
-
+**Option 1: Using Python directly**
 ```bash
-
 streamlit run main.py
+```
 
-```### 1. Install Dependencies- **🎤 Voice Interaction** - Speech-to-text input and text-to-speech output- **✅ Account Plan Generation**: Creates structured, professional account plans
-
-
-
-Or use the convenience script:
-
-
-
-```bash```bash- **📥 Export Options** - Download as JSON or formatted text- **✅ Editable Sections**: Update ANY section of the generated plan with text areas
-
+**Option 2: Using the start script**
+```bash
+chmod +x start.sh  # First time only
 ./start.sh
+```
 
-```pip install -r requirements.txt
+The application will open automatically at **`http://localhost:8501`**
 
+### Using the Assistant
 
+1. **Initial Query**: Ask about a company you want to research
+   ```
+   "Research Tesla Inc."
+   "Tell me about Microsoft's business model"
+   ```
 
-The app will open at **`http://localhost:8501`**```- **⚡ Fast & Free** - Powered by Groq's lightning-fast API (14,400 requests/day free)- **✅ AI Enhancement**: One-click AI enhancement for each section
+2. **Answer Questions**: The AI may ask clarifying questions to improve research quality
 
+3. **Review Research**: Monitor the research notes in the sidebar
 
+4. **Generate Account Plan**: Request or wait for the AI to generate a comprehensive plan
+
+5. **Edit Sections**: Click on any section to edit directly
+
+6. **Enhance with AI**: Use the "Enhance with AI" button for any section
+
+7. **Export**: Download your account plan in JSON or text format
+
+### Voice Mode
+
+1. Toggle **"🔊 Voice Mode"** in the sidebar
+2. Click **"🎤 Start Recording"**
+3. Allow microphone access when prompted
+4. Speak your query
+5. Click **"⏹️ Stop"** when finished
+6. Your speech will appear in the chat input
 
 ---
-
-
-
-## 💡 Usage### 2. Set Up API Key- **✅ Voice Interaction**: Full voice mode with speech-to-text input and text-to-speech output
-
-
-
-### Basic Research
-
-```
-
-"Research Tesla and create an account plan"Create a `.env` file:## 🚀 Quick Start- **✅ Export Options**: Download plans as JSON or formatted text
-
-```
-
-
-
-### Focused Research
-
-``````bash
-
-"Create an account plan for Microsoft focused on Azure cloud services"
-
-```GROQ_API_KEY=your_groq_api_key_here
-
-
-
-### Follow-up Questions```### 1. Install Dependencies### Interaction Modes
-
-```
-
-"Who are the key decision makers at Amazon?"
-
-"What are Apple's recent AI initiatives?"
-
-```Get your free API key at: **[https://console.groq.com/](https://console.groq.com/)**```bash1. **💬 Chat Mode** (Default): Type your questions and requests
-
-
-
----
-
-
-
-## 📋 Account Plan Sections### 3. Run the Apppip install -r requirements.txt2. **🎤 Voice Mode** (Toggleable): Speak your questions, hear AI responses read aloud
-
-
-
-The assistant generates comprehensive account plans with **10 structured sections**:
-
-
-
-1. **Executive Summary** - High-level overview and key opportunities```bash```   - Speech-to-text input using Web Speech API
-
-2. **Company Overview** - Size, industry, revenue, locations
-
-3. **Business Model** - Products, services, revenue streamsstreamlit run main.py
-
-4. **Market Position** - Competitors, market share, advantages
-
-5. **Recent News** - Strategic initiatives and developments```   - Text-to-speech output for responses
-
-6. **Key Stakeholders** - Decision makers and leadership
-
-7. **Pain Points** - Challenges and areas for improvement
-
-8. **Opportunities** - Recommendations and value propositions
-
-9. **Engagement Strategy** - Approach and key messagesOr use the convenience script:### 2. Set Up API Key   - Works in Chrome, Edge, Safari
-
-10. **Next Steps** - Specific action items with timelines
-
-
-
----
-
-```bashCreate a `.env` file:
-
-## 🎤 Voice Mode
-
-./start.sh
-
-Enable voice mode in the sidebar for enhanced interaction:
-
-``````bash### Account Plan Sections
-
-- **Voice Input** - Speak your questions (Chrome/Edge/Safari)
-
-- **Voice Output** - Listen to AI responses with adjustable playback speed
-
-- **Speed Controls** - Choose from 0.75x, 1.0x, 1.25x, or 1.5x playback
-
-The app will open at **`http://localhost:8501`**GROQ_API_KEY=your_groq_api_key_here1. Executive Summary
-
-> **Note:** Voice features require a modern browser (Chrome, Edge, or Safari) and microphone permissions.
-
-
-
----
-
----```2. Company Overview (size, industry, revenue, locations)
-
-## 🎨 Conversation Quality Enhancements
-
-
-
-### 1. Natural Language Processing
-
-- **Intent Detection** - Recognizes research, clarify, generate, and edit intents## 💡 Usage3. Business Model & Products/Services
-
-- **Entity Extraction** - Identifies company names and industries automatically
-
-- **Sentiment Analysis** - Monitors user satisfaction throughout the conversation
-
-
-
-### 2. Context Awareness### Basic ResearchGet your free API key at: [https://console.groq.com/](https://console.groq.com/)4. Market Position & Competitors
-
-- **Conversation Memory** - Remembers previous companies discussed
-
-- **Progress Tracking** - Keeps track of research progress and completed steps```
-
-- **Coherence Maintenance** - Maintains natural flow across multiple interactions
-
-"Research Tesla and create an account plan"5. Recent News & Strategic Initiatives
-
-### 3. Proactive Behavior
-
-- **Smart Clarifications** - Asks for clarification when encountering ambiguity```
-
-- **Next Step Suggestions** - Offers helpful recommendations for next actions
-
-- **Deep Dive Options** - Provides opportunities to explore topics in more detail### 3. Run the App6. Key Stakeholders & Decision Makers
-
-- **Alternative Paths** - Suggests alternatives when encountering blockers
-
-### Focused Research
-
-### 4. Error Handling
-
-- **Graceful Degradation** - System continues functioning even if search fails``````bash7. Pain Points & Challenges
-
-- **Clear Error Messages** - User-friendly explanations for any issues
-
-- **Fallback Mechanisms** - Alternative responses when primary method fails"Create an account plan for Microsoft focused on Azure cloud services"
-
-- **Input Validation** - Handles malformed or unexpected inputs smoothly
-
-```streamlit run main.py8. Opportunities & Recommendations
-
----
-
-
-
-## 🛠️ Tech Stack
-
-### Follow-up Questions```9. Engagement Strategy
-
-- **AI Model**: Llama 3.3 70B (via Groq API)
-
-- **Framework**: Streamlit```
-
-- **Voice**: Browser Web Speech API
-
-- **Language**: Python 3.10+"Who are the key decision makers at Amazon?"10. Next Steps
-
-
-
----"What are Apple's recent AI initiatives?"
-
-
-
-## 📦 Project Structure```Or use the convenience script:
-
-
-
-```
-
-eightfold/
-
-├── main.py              # Main application (951 lines)---```bash## 🚀 Getting Started
-
-├── requirements.txt     # Python dependencies
-
-├── .env                # API keys (not in git)
-
-├── .env.example        # Template for environment variables
-
-├── start.sh            # Convenience startup script## 📋 Account Plan Sections./start.sh
-
-├── .gitignore          # Git ignore rules
-
-└── README.md           # This file
-
-```
-
-The assistant generates comprehensive account plans with **10 structured sections**:```### Prerequisites
-
----
-
-
-
-## 🔒 Security
-
-1. **Executive Summary** - High-level overview and key opportunities- Python 3.10 or higher
-
-- ⚠️ Never commit `.env` file (already in `.gitignore`)
-
-- 🔑 Keep your API keys private2. **Company Overview** - Size, industry, revenue, locations
-
-- 🔄 Regenerate keys immediately if accidentally exposed
-
-3. **Business Model** - Products, services, revenue streamsThe app will open at `http://localhost:8501`- Google Gemini API key ([Get one here](https://aistudio.google.com/app/apikey))
-
----
-
-4. **Market Position** - Competitors, market share, advantages
-
-## 📝 License
-
-5. **Recent News** - Strategic initiatives and developments- Modern web browser (Chrome, Edge, or Safari recommended for voice features)
-
-This project is for educational and professional use.
-
-6. **Key Stakeholders** - Decision makers and leadership
-
----
-
-7. **Pain Points** - Challenges and areas for improvement## 💡 Usage
-
-## 🤝 Contributing
-
-8. **Opportunities** - Recommendations and value propositions
-
-Feel free to fork, improve, and submit pull requests!
-
-9. **Engagement Strategy** - Approach and key messages### Installation
-
----
-
-10. **Next Steps** - Specific action items with timelines
-
-**Built with ❤️ using Groq AI and Streamlit**
-
-### Basic Research
-
----
-
-```1. **Clone the repository**
-
-## 🎤 Voice Mode
-
-"Research Tesla and create an account plan"```bash
-
-Enable voice mode in the sidebar for enhanced interaction:
-
-```git clone <your-repo-url>
-
-- **Voice Input** - Speak your questions (Chrome/Edge/Safari)
-
-- **Voice Output** - Listen to AI responses with adjustable playback speedcd eightfold
-
-- **Speed Controls** - Choose from 0.75x, 1.0x, 1.25x, or 1.5x playback
-
-### Focused Research```
-
-> **Note:** Voice features require a modern browser (Chrome, Edge, or Safari) and microphone permissions.
-
-```
-
----
-
-"Create an account plan for Microsoft focused on Azure cloud services"2. **Install dependencies**
-
-## 🛠️ Tech Stack
-
-``````bash
-
-- **AI Model**: Llama 3.3 70B (via Groq API)
-
-- **Framework**: Streamlitpip install -r requirements.txt
-
-- **Voice**: Browser Web Speech API
-
-- **Language**: Python 3.10+### Follow-up Questions```
-
-
-
----```
-
-
-
-## 📦 Project Structure"Who are the key decision makers at Amazon?"3. **Set up environment variables**
-
-
-
-```"What are Apple's recent AI initiatives?"```bash
-
-eightfold/
-
-├── main.py              # Main application (951 lines)```cp .env.example .env
-
-├── requirements.txt     # Python dependencies
-
-├── .env                # API keys (not in git)```
-
-├── .env.example        # Template for environment variables
-
-├── start.sh            # Convenience startup script## 📋 Account Plan SectionsEdit `.env` and add your Gemini API key:
-
-├── .gitignore          # Git ignore rules
-
-└── README.md           # This file```
-
-```
-
-1. **Executive Summary** - High-level overview and key opportunitiesGEMINI_API_KEY=your_actual_api_key_here
-
----
-
-2. **Company Overview** - Size, industry, revenue, locations```
-
-## 🔒 Security
-
-3. **Business Model** - Products, services, revenue streams
-
-- ⚠️ Never commit `.env` file (already in `.gitignore`)
-
-- 🔑 Keep your API keys private4. **Market Position** - Competitors, market share, advantages4. **Run the application**
-
-- 🔄 Regenerate keys immediately if accidentally exposed
-
-5. **Recent News** - Strategic initiatives and developments```bash
-
----
-
-6. **Key Stakeholders** - Decision makers and leadershipstreamlit run main.py
-
-## 📝 License
-
-7. **Pain Points** - Challenges and areas for improvement```
-
-This project is for educational and professional use.
-
-8. **Opportunities** - Recommendations and value propositionsOr use the convenience script:
-
----
-
-9. **Engagement Strategy** - Approach and key messages```bash
-
-## 🤝 Contributing
-
-10. **Next Steps** - Specific action items with timelines./start.sh
-
-Feel free to fork, improve, and submit pull requests!
-
-```
-
----
-
-## 🎤 Voice Mode
-
-**Built with ❤️ using Groq AI and Streamlit**
-
-The app will open in your browser at `http://localhost:8501`
-
-Enable voice mode in the sidebar for:
-
-- **Voice Input** - Speak your questions (Chrome/Edge/Safari)The app will open in your browser at `http://localhost:8501`
-
-- **Voice Output** - Listen to AI responses with adjustable playback speed
-
-- **Speed Controls** - 0.75x, 1.0x, 1.25x, 1.5x playback options## 💡 Usage Examples
-
-
-
-## 🛠️ Tech Stack### Basic Research
-
-```
-
-- **AI Model**: Llama 3.3 70B (via Groq API)User: "Research Tesla"
-
-- **Framework**: StreamlitAssistant: "I'll research Tesla for you. Let me gather information about their business, recent news, and strategic initiatives..."
-
-- **Voice**: Browser Web Speech API```
-
-- **Language**: Python 3.10+
-
-### Focused Research
-
-## 📦 Project Structure```
-
-User: "Create an account plan for Microsoft focused on their Azure cloud services"
-
-```Assistant: "I'll create a comprehensive account plan for Microsoft with emphasis on Azure. Let me search for the latest information..."
-
-eightfold/```
-
-├── main.py              # Main application
-
-├── requirements.txt     # Python dependencies### Follow-up Questions
-
-├── .env                # API keys (not in git)```
-
-├── .env.example        # Template for environment variablesUser: "Who are the key decision makers at Amazon?"
-
-├── start.sh            # Convenience startup scriptAssistant: "I'm finding information about Amazon's leadership team. Should I focus on corporate leadership, AWS executives, or retail division leaders?"
-
-└── README.md           # This file```
-
-```
-
-## 👥 User Scenarios Handled
-
-## 🔒 Security
-
-### 1. The Confused User
-
-- Never commit `.env` file (already in `.gitignore`)**Behavior**: Unsure what they want, vague requests
-
-- Keep your API keys private
-
-- Regenerate keys if accidentally exposed**How we handle it**:
-
-- Ask clarifying questions gently
-
-## 📝 License- Provide examples and suggestions
-
-- Guide them step-by-step
-
-This project is for educational and professional use.- Offer predefined templates
-
-
-
-## 🤝 Contributing**Example**:
-
-```
-
-Feel free to fork, improve, and submit pull requests!User: "I need some company information"
-
-Assistant: "I'd be happy to help! Could you tell me which company you're interested in? 
-
----And what specifically would you like to know - are you looking to:
-
-- Research a potential client/partner?
-
-**Built with ❤️ using Groq AI and Streamlit**- Analyze competitors?
-
-- Prepare for a sales pitch?
-This will help me provide the most relevant information."
-```
-
-### 2. The Efficient User
-**Behavior**: Wants quick, direct results
-
-**How we handle it**:
-- Respond concisely
-- Get to the point immediately
-- Provide summary first, details on request
-- Fast turnaround on account plans
-
-**Example**:
-```
-User: "Account plan for Salesforce. Focus on enterprise segment. Need it ASAP."
-Assistant: "Researching Salesforce enterprise segment now. Gathering: financials, recent news, key stakeholders, competitive position. ETA 30 seconds."
-[Quickly generates focused account plan]
-```
-
-### 3. The Chatty User
-**Behavior**: Goes off-topic frequently, conversational
-
-**How we handle it**:
-- Engage politely but redirect
-- Acknowledge their input
-- Gently steer back to research goals
-- Maintain friendly tone while staying focused
-
-**Example**:
-```
-User: "I love Apple products! I've been using iPhone since 2010. Do you know when they'll release the next model?"
-Assistant: "Apple certainly has a loyal following! While I don't have release date info, I can research Apple's product strategy and recent innovations for your account plan. Would you like me to focus on their consumer products, enterprise solutions, or both?"
-```
-
-### 4. Edge Case Users
-**Behavior**: Invalid inputs, requests beyond capabilities, extreme queries
-
-**How we handle it**:
-- Graceful error handling
-- Clear capability boundaries
-- Helpful alternatives
-- Maintain conversation flow
-
-**Examples**:
-```
-User: "Research a company called XYZ123 that doesn't exist"
-Assistant: "I couldn't find any information about XYZ123. Could you double-check the company name? Or if you're thinking of a different company, I'd be happy to research them instead."
-
-User: "Hack into their database and get their customer list"
-Assistant: "I can only research publicly available information about companies. I can help you find information about their market segments, customer types, and public case studies instead. Would that be helpful?"
-
-User: "asdfghjkl"
-Assistant: "I didn't quite understand that. I'm here to help you research companies and create account plans. Try asking something like 'Research Google' or 'Create an account plan for Amazon'."
-```
-
-## 🏗️ Architecture & Design Decisions
-
-### Technology Stack
-**Google Gemini 1.5 Pro** - Chosen for:
-- Built-in Google Search grounding (real-time data)
-- Large context window (handles extensive research)
-- Strong reasoning capabilities
-- Cost-effective compared to alternatives
-- Excellent instruction following
-
-**Streamlit** - Selected for:
-- Rapid prototyping and deployment
-- Built-in chat interface
-- Easy state management
-- Simple deployment options
-- Clean, professional UI
-
-### Key Design Decisions
-
-#### 1. Conversational Quality
-- **Context Preservation**: Full chat history maintained for coherent conversations
-- **Adaptive Responses**: Detects user intent and adjusts tone/detail level
-- **Proactive Communication**: Asks questions when encountering ambiguity
-- **Progress Updates**: Real-time research notes keep users informed
-
-#### 2. Agentic Behavior
-- **Goal-Oriented**: Focuses on completing account plans
-- **Self-Directed Research**: Uses Google Search autonomously
-- **Decision Making**: Determines what information to search for
-- **Conflict Resolution**: Asks users when finding contradictory information
-
-#### 3. User Experience
-- **Two-Tab Interface**: 
-  - Chat for interaction
-  - Dedicated plan view for editing
-- **Inline Editing**: Direct text area editing for quick updates
-- **AI Enhancement**: One-click improvement of any section
-- **Export Options**: Multiple formats for different use cases
-
-#### 4. Error Handling
-- **Graceful Degradation**: System continues functioning even if search fails
-- **Clear Error Messages**: User-friendly explanations
-- **Fallback Mechanisms**: Alternative responses when primary fails
-- **Input Validation**: Handles malformed or unexpected inputs
-
-#### 5. Data Structure
-```python
-account_plan = {
-    "executive_summary": str,
-    "company_overview": str,
-    "business_model": str,
-    "market_position": str,
-    "recent_news": str,
-    "key_stakeholders": str,
-    "pain_points": str,
-    "opportunities": str,
-    "engagement_strategy": str,
-    "next_steps": str
-}
-```
-
-## 🧪 Testing Scenarios
-
-### Test with Confused User
-```
-1. "I need something"
-2. "um maybe a company?"
-3. "I don't know which one"
-```
-**Expected**: Gentle guidance, example questions, helpful suggestions
-
-### Test with Efficient User
-```
-"Account plan for Apple. Focus: enterprise segment, healthcare vertical, key buyers, competitive position vs Microsoft. Export as JSON."
-```
-**Expected**: Fast, focused response with all requested elements
-
-### Test with Chatty User
-```
-1. "Hey! How are you today? I'm looking for... oh wait, did you see the news about Tesla?"
-2. "Anyway, I think Elon Musk is interesting. What do you think?"
-3. "Oh right, I need to research something..."
-```
-**Expected**: Polite engagement but consistent redirection to goals
-
-### Test Edge Cases
-```
-1. "" (empty input)
-2. "!@#$%^&*()"
-3. "Research a company that went bankrupt 50 years ago"
-4. "Give me their CEO's personal phone number"
-5. Very long request (3000+ words)
-```
-**Expected**: Graceful handling, helpful responses, clear boundaries
 
 ## 📁 Project Structure
 
 ```
 eightfold/
-├── main.py              # Main Streamlit application
-├── requirements.txt     # Python dependencies
-├── .env                 # Environment variables (not in git)
-├── .env.example        # Example environment file
-├── .gitignore          # Git ignore rules
-└── README.md           # This file
+│
+├── main.py                 # Main application file (1089 lines)
+│   ├── UI Components       # Streamlit interface and styling
+│   ├── API Integration     # Groq API client and calls
+│   ├── Business Logic      # Plan parsing, enhancement, export
+│   ├── State Management    # Session state handling
+│   └── Voice Features      # Speech recognition & synthesis
+│
+├── requirements.txt        # Python dependencies
+├── start.sh               # Convenience startup script
+├── README.md              # This documentation
+├── .env                   # Environment variables (create this)
+└── .gitignore            # Git ignore rules
+
 ```
 
-## 🔧 Configuration
+### File Descriptions
 
-### Environment Variables
-- `GEMINI_API_KEY`: Your Google Gemini API key (required)
+**`main.py`** - Core application containing:
+- Streamlit UI setup and custom CSS
+- Groq API integration with Llama 3.3 70B
+- Account plan generation and parsing logic
+- Voice input/output features
+- Section editing and AI enhancement
+- Export functionality (JSON/Text)
+- Session state management
 
-### Model Configuration
-```python
-generation_config = {
-    "temperature": 0.7,      # Balance creativity/consistency
-    "top_p": 0.95,          # Nucleus sampling
-    "top_k": 40,            # Token selection diversity
-    "max_output_tokens": 8192  # Long-form content support
-}
-```
-
-## 🎨 Conversation Quality Enhancements
-
-1. **Natural Language Processing**
-   - Intent detection (research, clarify, generate, edit)
-   - Entity extraction (company names, industries)
-   - Sentiment analysis (user satisfaction)
-
-2. **Context Awareness**
-   - Remembers previous companies discussed
-   - Tracks research progress
-   - Maintains conversation coherence
-
-3. **Proactive Behavior**
-   - Asks for clarification when needed
-   - Suggests next steps
-   - Offers to dig deeper on topics
-   - Provides alternatives when blocked
-
-4. **Personality Traits**
-   - Professional but approachable
-   - Knowledgeable without being condescending
-   - Patient with confused users
-   - Efficient with time-conscious users
-
-## 🚀 Future Enhancements
-
-- [ ] Voice input/output support
-- [ ] Multi-company comparison mode
-- [ ] Integration with CRM systems
-- [ ] Scheduled research updates
-- [ ] Custom report templates
-- [ ] Team collaboration features
-- [ ] Research history and favorites
-- [ ] Advanced data visualization
-
-## 🐛 Known Issues
-
-- **grpcio version conflict**: Ray library has version constraints. This doesn't affect functionality for this use case.
-- **Search rate limits**: Google Search grounding has usage limits on free tier
-
-## 📝 License
-
-[Your License Here]
-
-## 👤 Author
-
-[Your Name/Team]
-
-## 🙏 Acknowledgments
-
-- Google Gemini AI for powerful language understanding
-- Streamlit for rapid application development
-- The open-source community
+**`requirements.txt`** - Python package dependencies
+**`start.sh`** - Bash script for quick application startup
+**`.env`** - Environment variables (API keys) - **not tracked in git**
 
 ---
 
-**Built for Eightfold AI Capstone Project**
+## 🔧 Technologies
+
+### Core Technologies
+
+| Technology | Purpose | Version |
+|-----------|---------|---------|
+| **Python** | Programming Language | 3.8+ |
+| **Streamlit** | Web Framework | 1.28.0+ |
+| **Groq API** | AI/LLM Provider | 0.4.0+ |
+| **Llama 3.3 70B** | Language Model | Latest |
+
+### Supporting Libraries
+
+- **python-dotenv** - Environment variable management
+- **sounddevice** - Audio device interface
+- **soundfile** - Audio file operations
+- **numpy** - Numerical computations
+
+### Frontend Technologies
+
+- **HTML/CSS** - Custom styling
+- **JavaScript** - Web Speech API integration
+- **Streamlit Components** - Interactive UI elements
+
+---
+
+## 📊 API Information
+
+### Groq API Details
+
+**Model**: `llama-3.3-70b-versatile`
+
+**Parameters**:
+- `temperature`: 0.7 (balanced creativity)
+- `max_tokens`: 8,192 (long-form content)
+- `top_p`: 0.95 (nucleus sampling)
+
+**Free Tier Limits**:
+- ✅ **14,400 requests per day**
+- ✅ **No credit card required**
+- ✅ **Extremely fast inference** (~100+ tokens/second)
+- ✅ **No expiration** (as of 2025)
+
+**Get Your API Key**: [https://console.groq.com/](https://console.groq.com/)
+
+---
+
+## 💡 Usage Examples
+
+### Basic Research
+
+```
+User: "Research Tesla"
+AI: "I'll research Tesla for you. Let me gather information about their 
+     business, financials, recent news, and strategic initiatives..."
+```
+
+### Focused Research
+
+```
+User: "Create an account plan for Microsoft focused on Azure cloud services"
+AI: "I'll create a comprehensive account plan for Microsoft with emphasis 
+     on Azure. Searching for latest Azure developments..."
+```
+
+### Follow-up Questions
+
+```
+User: "Who are the key decision makers at Amazon?"
+AI: "I'll find information about Amazon's leadership. Should I focus on 
+     corporate leadership, AWS executives, or retail division leaders?"
+```
+
+### Editing Sections
+
+1. Navigate to the **"📄 Account Plan"** tab
+2. Scroll to any section
+3. Click in the text area to edit
+4. Click **"💾 Save Changes"** to update
+5. Or click **"✨ Enhance with AI"** for AI improvements
+
+---
+
+## 🎯 User Scenarios
+
+### The Confused User
+**Behavior**: Unsure what they want, vague requests
+
+**How we handle**:
+- Ask clarifying questions
+- Provide examples and suggestions
+- Guide step-by-step
+
+**Example**:
+```
+User: "I need some company information"
+AI: "I'd be happy to help! Which company interests you? Are you looking to:
+     - Research a potential client?
+     - Analyze competitors?
+     - Prepare for a sales pitch?"
+```
+
+### The Efficient User
+**Behavior**: Wants quick, direct results
+
+**How we handle**:
+- Respond concisely
+- Get to the point immediately
+- Fast turnaround
+
+**Example**:
+```
+User: "Account plan for Salesforce. Enterprise segment. ASAP."
+AI: "Researching Salesforce enterprise segment now. Gathering financials, 
+     news, stakeholders, competitive position. ETA 30 seconds."
+```
+
+### The Chatty User
+**Behavior**: Goes off-topic, conversational
+
+**How we handle**:
+- Engage politely but redirect
+- Maintain friendly tone
+- Stay focused on research
+
+**Example**:
+```
+User: "I love Apple! Been using iPhone since 2010!"
+AI: "Apple has great customer loyalty! I can research their product strategy 
+     and innovations for your account plan. Consumer products or enterprise?"
+```
+
+---
+
+## 🔧 Troubleshooting
+
+### Common Issues
+
+**Issue**: Application won't start
+```bash
+# Solution: Check Python version
+python --version  # Should be 3.8+
+
+# Reinstall dependencies
+pip install -r requirements.txt --upgrade
+```
+
+**Issue**: API key not found
+```bash
+# Solution: Verify .env file exists and is properly formatted
+cat .env  # Should show: GROQ_API_KEY=your_key_here
+
+# Make sure .env is in the project root directory
+```
+
+**Issue**: Voice mode not working
+- ✅ Use Chrome, Edge, or Safari (Firefox not supported)
+- ✅ Allow microphone permissions when prompted
+- ✅ Check browser console (F12) for errors
+- ✅ Click "Test Microphone" button for diagnostics
+
+**Issue**: Slow responses
+- ✅ Check internet connection
+- ✅ Verify Groq API status at [status.groq.com](https://status.groq.com)
+- ✅ Check if you've hit daily rate limit (14,400 requests)
+
+---
+
+## 🔒 Security & Privacy
+
+### Best Practices
+
+✅ **Never commit `.env` file** - Already in `.gitignore`  
+✅ **Keep API keys private** - Don't share or expose  
+✅ **Regenerate keys if exposed** - Immediately in Groq console  
+✅ **Use environment variables** - Never hardcode API keys  
+✅ **Local processing** - All data stays on your machine except API calls
+
+### Data Privacy
+
+- ✅ No data stored on external servers (except Groq API calls)
+- ✅ Session data stored only in browser memory
+- ✅ Clears on page refresh or "Start New Research"
+- ✅ Exports saved locally to your machine
+
+---
+
+## 🚀 Advanced Features
+
+### Custom System Prompt
+
+Modify the `SYSTEM_PROMPT` in `main.py` (line 120) to customize AI behavior:
+
+```python
+SYSTEM_PROMPT = """You are an expert Company Research Assistant..."""
+```
+
+### Adjusting AI Parameters
+
+Fine-tune AI responses in `call_groq_api()` function:
+
+```python
+response = client.chat.completions.create(
+    model="llama-3.3-70b-versatile",
+    temperature=0.7,      # Lower = more focused, Higher = more creative
+    max_tokens=8192,      # Maximum response length
+    top_p=0.95,          # Nucleus sampling threshold
+)
+```
+
+### Adding Custom Sections
+
+Extend the account plan by modifying `section_markers` dictionary in `parse_account_plan()`:
+
+```python
+section_markers = {
+    "Executive Summary": "executive_summary",
+    "Your Custom Section": "custom_section",  # Add here
+    # ... other sections
+}
+```
+
+---
+
+## 📈 Roadmap
+
+### Planned Features
+
+- [ ] **Multi-company comparison** - Compare multiple companies side-by-side
+- [ ] **PDF export** - Professional formatted PDF output
+- [ ] **Template library** - Pre-built templates for different industries
+- [ ] **Collaboration features** - Share and co-edit account plans
+- [ ] **Integration APIs** - Connect with CRM systems (Salesforce, HubSpot)
+- [ ] **Advanced search** - Filter and search within account plans
+- [ ] **Analytics dashboard** - Track research patterns and insights
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Here's how you can help:
+
+### Ways to Contribute
+
+1. **Report bugs** - Open an issue with detailed description
+2. **Suggest features** - Share your ideas in issues
+3. **Improve documentation** - Fix typos, add examples
+4. **Submit pull requests** - Add new features or fix bugs
+
+### Development Setup
+
+```bash
+# Fork the repository
+git clone https://github.com/Shreyasdk28/eightfold.git
+cd eightfold
+
+# Create a branch
+git checkout -b feature/your-feature-name
+
+# Make your changes
+# Test thoroughly
+
+# Commit and push
+git commit -m "Add your feature"
+git push origin feature/your-feature-name
+
+# Open a pull request
+```
+
+---
+
+## 📄 License
+
+This project is for **educational and professional use**. 
+
+---
+
+## 📞 Support
+
+### Getting Help
+
+- 📧 **Issues**: Open a GitHub issue for bugs or questions
+- 📚 **Documentation**: Check this README first
+- 🔗 **Groq Docs**: [https://console.groq.com/docs](https://console.groq.com/docs)
+- 🔗 **Streamlit Docs**: [https://docs.streamlit.io](https://docs.streamlit.io)
+
+### Useful Resources
+
+- [Groq Console](https://console.groq.com/) - API key management
+- [Streamlit Gallery](https://streamlit.io/gallery) - Example apps
+- [Python Documentation](https://docs.python.org/) - Python reference
+
+---
+
+## 🙏 Acknowledgments
+
+Built with powerful tools from the open-source community:
+
+- **Groq** - For lightning-fast LLM inference
+- **Meta AI** - For the Llama 3.3 70B model
+- **Streamlit** - For the elegant web framework
+- **Python Community** - For excellent libraries and tools
+
+---
+
+## 📊 Stats
+
+- **Lines of Code**: ~1,089 (main.py)
+- **AI Model**: Llama 3.3 70B (70 billion parameters)
+- **Response Time**: < 2 seconds (typical)
+- **Account Plan Sections**: 10
+- **Free Daily Requests**: 14,400
+
+---
+
+<div align="center">
+
+**Built with ❤️ using Groq AI and Streamlit**
+
+[⭐ Star this repo](https://github.com/Shreyasdk28/eightfold) | [🐛 Report Bug](https://github.com/Shreyasdk28/eightfold/issues) | [💡 Request Feature](https://github.com/Shreyasdk28/eightfold/issues)
+
+---
+
+*Last updated: November 2025*
