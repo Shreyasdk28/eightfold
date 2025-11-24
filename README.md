@@ -1,148 +1,294 @@
-# 🏢 Company Research Assistant# Company Research Assistant (Account Plan Generator)
+# 🏢 Company Research Assistant# 🏢 Company Research Assistant# Company Research Assistant (Account Plan Generator)
 
 
 
-An AI-powered research assistant that helps you create comprehensive account plans through natural conversation. Built with **Groq AI** (Llama 3.3 70B) and **Streamlit**.An intelligent AI-powered assistant that helps users research companies through natural conversation and generate comprehensive account plans. Built with Google Gemini AI with Google Search grounding and Streamlit.
+An AI-powered research assistant that helps you create comprehensive account plans through natural conversation. Built with **Groq AI** (Llama 3.3 70B) and **Streamlit**.
 
 
 
-## ✨ Features## 🎯 Features
+---An AI-powered research assistant that helps you create comprehensive account plans through natural conversation. Built with **Groq AI** (Llama 3.3 70B) and **Streamlit**.An intelligent AI-powered assistant that helps users research companies through natural conversation and generate comprehensive account plans. Built with Google Gemini AI with Google Search grounding and Streamlit.
 
 
 
-- **💬 Intelligent Conversation** - Natural dialogue with context awareness### Core Capabilities
-
-- **📊 Account Plan Generation** - Structured 10-section professional plans- **✅ Multi-Source Research**: Gathers information using **Google Search grounding** for real-time, accurate data from multiple sources
-
-- **✏️ Editable Sections** - Update any section with built-in editors- **✅ Interactive Conversation**: Natural dialogue with context awareness
-
-- **🤖 AI Enhancement** - One-click AI improvement for each section- **✅ Progress Updates**: Provides real-time research status and asks clarifying questions during research
-
-- **🎤 Voice Interaction** - Speech-to-text input and text-to-speech output- **✅ Account Plan Generation**: Creates structured, professional account plans
-
-- **📥 Export Options** - Download as JSON or formatted text- **✅ Editable Sections**: Update ANY section of the generated plan with text areas
-
-- **⚡ Fast & Free** - Powered by Groq's lightning-fast API (14,400 requests/day free)- **✅ AI Enhancement**: One-click AI enhancement for each section
-
-- **✅ Voice Interaction**: Full voice mode with speech-to-text input and text-to-speech output
-
-## 🚀 Quick Start- **✅ Export Options**: Download plans as JSON or formatted text
+## ✨ Features
 
 
 
-### 1. Install Dependencies### Interaction Modes
+- **💬 Intelligent Conversation** - Natural dialogue with context awareness## ✨ Features## 🎯 Features
 
-```bash1. **💬 Chat Mode** (Default): Type your questions and requests
+- **📊 Account Plan Generation** - Structured 10-section professional plans
 
-pip install -r requirements.txt2. **🎤 Voice Mode** (Toggleable): Speak your questions, hear AI responses read aloud
+- **✏️ Editable Sections** - Update any section with built-in editors
 
-```   - Speech-to-text input using Web Speech API
+- **🤖 AI Enhancement** - One-click AI improvement for each section
 
-   - Text-to-speech output for responses
+- **🎤 Voice Interaction** - Speech-to-text input and text-to-speech output- **💬 Intelligent Conversation** - Natural dialogue with context awareness### Core Capabilities
 
-### 2. Set Up API Key   - Works in Chrome, Edge, Safari
+- **📥 Export Options** - Download as JSON or formatted text
 
-Create a `.env` file:
+- **⚡ Fast & Free** - Powered by Groq's lightning-fast API (14,400 requests/day free)- **📊 Account Plan Generation** - Structured 10-section professional plans- **✅ Multi-Source Research**: Gathers information using **Google Search grounding** for real-time, accurate data from multiple sources
 
-```bash### Account Plan Sections
 
-GROQ_API_KEY=your_groq_api_key_here1. Executive Summary
 
-```2. Company Overview (size, industry, revenue, locations)
+---- **✏️ Editable Sections** - Update any section with built-in editors- **✅ Interactive Conversation**: Natural dialogue with context awareness
 
-3. Business Model & Products/Services
 
-Get your free API key at: [https://console.groq.com/](https://console.groq.com/)4. Market Position & Competitors
 
-5. Recent News & Strategic Initiatives
+## 🚀 Quick Start- **🤖 AI Enhancement** - One-click AI improvement for each section- **✅ Progress Updates**: Provides real-time research status and asks clarifying questions during research
 
-### 3. Run the App6. Key Stakeholders & Decision Makers
 
-```bash7. Pain Points & Challenges
 
-streamlit run main.py8. Opportunities & Recommendations
+### 1. Install Dependencies- **🎤 Voice Interaction** - Speech-to-text input and text-to-speech output- **✅ Account Plan Generation**: Creates structured, professional account plans
 
-```9. Engagement Strategy
 
-10. Next Steps
 
-Or use the convenience script:
-
-```bash## 🚀 Getting Started
-
-./start.sh
-
-```### Prerequisites
-
-- Python 3.10 or higher
-
-The app will open at `http://localhost:8501`- Google Gemini API key ([Get one here](https://aistudio.google.com/app/apikey))
-
-- Modern web browser (Chrome, Edge, or Safari recommended for voice features)
-
-## 💡 Usage
-
-### Installation
-
-### Basic Research
-
-```1. **Clone the repository**
-
-"Research Tesla and create an account plan"```bash
-
-```git clone <your-repo-url>
-
-cd eightfold
-
-### Focused Research```
-
-```
-
-"Create an account plan for Microsoft focused on Azure cloud services"2. **Install dependencies**
-
-``````bash
+```bash- **📥 Export Options** - Download as JSON or formatted text- **✅ Editable Sections**: Update ANY section of the generated plan with text areas
 
 pip install -r requirements.txt
 
-### Follow-up Questions```
+```- **⚡ Fast & Free** - Powered by Groq's lightning-fast API (14,400 requests/day free)- **✅ AI Enhancement**: One-click AI enhancement for each section
+
+
+
+### 2. Set Up API Key- **✅ Voice Interaction**: Full voice mode with speech-to-text input and text-to-speech output
+
+
+
+Create a `.env` file:## 🚀 Quick Start- **✅ Export Options**: Download plans as JSON or formatted text
+
+
+
+```bash
+
+GROQ_API_KEY=your_groq_api_key_here
+
+```### 1. Install Dependencies### Interaction Modes
+
+
+
+Get your free API key at: **[https://console.groq.com/](https://console.groq.com/)**```bash1. **💬 Chat Mode** (Default): Type your questions and requests
+
+
+
+### 3. Run the Apppip install -r requirements.txt2. **🎤 Voice Mode** (Toggleable): Speak your questions, hear AI responses read aloud
+
+
+
+```bash```   - Speech-to-text input using Web Speech API
+
+streamlit run main.py
+
+```   - Text-to-speech output for responses
+
+
+
+Or use the convenience script:### 2. Set Up API Key   - Works in Chrome, Edge, Safari
+
+
+
+```bashCreate a `.env` file:
+
+./start.sh
+
+``````bash### Account Plan Sections
+
+
+
+The app will open at **`http://localhost:8501`**GROQ_API_KEY=your_groq_api_key_here1. Executive Summary
+
+
+
+---```2. Company Overview (size, industry, revenue, locations)
+
+
+
+## 💡 Usage3. Business Model & Products/Services
+
+
+
+### Basic ResearchGet your free API key at: [https://console.groq.com/](https://console.groq.com/)4. Market Position & Competitors
 
 ```
 
-"Who are the key decision makers at Amazon?"3. **Set up environment variables**
-
-"What are Apple's recent AI initiatives?"```bash
-
-```cp .env.example .env
+"Research Tesla and create an account plan"5. Recent News & Strategic Initiatives
 
 ```
 
-## 📋 Account Plan SectionsEdit `.env` and add your Gemini API key:
+### 3. Run the App6. Key Stakeholders & Decision Makers
+
+### Focused Research
+
+``````bash7. Pain Points & Challenges
+
+"Create an account plan for Microsoft focused on Azure cloud services"
+
+```streamlit run main.py8. Opportunities & Recommendations
+
+
+
+### Follow-up Questions```9. Engagement Strategy
+
+```
+
+"Who are the key decision makers at Amazon?"10. Next Steps
+
+"What are Apple's recent AI initiatives?"
+
+```Or use the convenience script:
+
+
+
+---```bash## 🚀 Getting Started
+
+
+
+## 📋 Account Plan Sections./start.sh
+
+
+
+The assistant generates comprehensive account plans with **10 structured sections**:```### Prerequisites
+
+
+
+1. **Executive Summary** - High-level overview and key opportunities- Python 3.10 or higher
+
+2. **Company Overview** - Size, industry, revenue, locations
+
+3. **Business Model** - Products, services, revenue streamsThe app will open at `http://localhost:8501`- Google Gemini API key ([Get one here](https://aistudio.google.com/app/apikey))
+
+4. **Market Position** - Competitors, market share, advantages
+
+5. **Recent News** - Strategic initiatives and developments- Modern web browser (Chrome, Edge, or Safari recommended for voice features)
+
+6. **Key Stakeholders** - Decision makers and leadership
+
+7. **Pain Points** - Challenges and areas for improvement## 💡 Usage
+
+8. **Opportunities** - Recommendations and value propositions
+
+9. **Engagement Strategy** - Approach and key messages### Installation
+
+10. **Next Steps** - Specific action items with timelines
+
+### Basic Research
+
+---
+
+```1. **Clone the repository**
+
+## 🎤 Voice Mode
+
+"Research Tesla and create an account plan"```bash
+
+Enable voice mode in the sidebar for enhanced interaction:
+
+```git clone <your-repo-url>
+
+- **Voice Input** - Speak your questions (Chrome/Edge/Safari)
+
+- **Voice Output** - Listen to AI responses with adjustable playback speedcd eightfold
+
+- **Speed Controls** - Choose from 0.75x, 1.0x, 1.25x, or 1.5x playback
+
+### Focused Research```
+
+> **Note:** Voice features require a modern browser (Chrome, Edge, or Safari) and microphone permissions.
+
+```
+
+---
+
+"Create an account plan for Microsoft focused on Azure cloud services"2. **Install dependencies**
+
+## 🛠️ Tech Stack
+
+``````bash
+
+- **AI Model**: Llama 3.3 70B (via Groq API)
+
+- **Framework**: Streamlitpip install -r requirements.txt
+
+- **Voice**: Browser Web Speech API
+
+- **Language**: Python 3.10+### Follow-up Questions```
+
+
+
+---```
+
+
+
+## 📦 Project Structure"Who are the key decision makers at Amazon?"3. **Set up environment variables**
+
+
+
+```"What are Apple's recent AI initiatives?"```bash
+
+eightfold/
+
+├── main.py              # Main application (951 lines)```cp .env.example .env
+
+├── requirements.txt     # Python dependencies
+
+├── .env                # API keys (not in git)```
+
+├── .env.example        # Template for environment variables
+
+├── start.sh            # Convenience startup script## 📋 Account Plan SectionsEdit `.env` and add your Gemini API key:
+
+├── .gitignore          # Git ignore rules
+
+└── README.md           # This file```
 
 ```
 
 1. **Executive Summary** - High-level overview and key opportunitiesGEMINI_API_KEY=your_actual_api_key_here
 
+---
+
 2. **Company Overview** - Size, industry, revenue, locations```
+
+## 🔒 Security
 
 3. **Business Model** - Products, services, revenue streams
 
-4. **Market Position** - Competitors, market share, advantages4. **Run the application**
+- ⚠️ Never commit `.env` file (already in `.gitignore`)
+
+- 🔑 Keep your API keys private4. **Market Position** - Competitors, market share, advantages4. **Run the application**
+
+- 🔄 Regenerate keys immediately if accidentally exposed
 
 5. **Recent News** - Strategic initiatives and developments```bash
 
+---
+
 6. **Key Stakeholders** - Decision makers and leadershipstreamlit run main.py
+
+## 📝 License
 
 7. **Pain Points** - Challenges and areas for improvement```
 
+This project is for educational and professional use.
+
 8. **Opportunities** - Recommendations and value propositionsOr use the convenience script:
+
+---
 
 9. **Engagement Strategy** - Approach and key messages```bash
 
+## 🤝 Contributing
+
 10. **Next Steps** - Specific action items with timelines./start.sh
+
+Feel free to fork, improve, and submit pull requests!
 
 ```
 
+---
+
 ## 🎤 Voice Mode
+
+**Built with ❤️ using Groq AI and Streamlit**
 
 The app will open in your browser at `http://localhost:8501`
 
