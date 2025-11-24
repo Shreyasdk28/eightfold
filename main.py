@@ -3,6 +3,7 @@ from groq import Groq
 import json
 from datetime import datetime
 import os
+import traceback
 from typing import List, Dict
 from dotenv import load_dotenv
 
@@ -238,24 +239,64 @@ def call_groq_api(user_message: str, chat_history: List = None) -> str:
 def enhance_section(section_content: str, section_name: str) -> str:
     """Enhance a specific section using Groq"""
     try:
-        prompt = f"""Please enhance and improve this section of an account plan titled "{section_name}". 
-Make it more detailed, actionable, and professional. Maintain a business-appropriate tone.
+        prompt = f"""You are an expert business analyst enhancing an account plan section. You MUST significantly improve and expand the content.
+
+IMPORTANT: Do NOT just repeat the original content. You must:
+1. Add MORE specific details, data points, and examples
+2. Expand on key points with deeper analysis
+3. Include actionable recommendations
+4. Add relevant metrics, timelines, or frameworks
+5. Make it at least 30-50% longer and more comprehensive
+6. Use professional business language
+
+Section: {section_name}
 
 Current content:
 {section_content}
 
-Enhanced version:"""
+Now provide an ENHANCED, EXPANDED, and MORE DETAILED version (do NOT just copy the original):"""
         
         response = client.chat.completions.create(
             model="llama-3.3-70b-versatile",
             messages=[
-                {"role": "system", "content": "You are an expert business analyst who creates detailed, professional account plans."},
+                {"role": "system", "content": "You are an expert business analyst who creates detailed, professional account plans. When asked to enhance content, you ALWAYS make it significantly better, longer, and more detailed. Never return the same content."},
                 {"role": "user", "content": prompt}
             ],
-            temperature=0.7,
-            max_tokens=4096
+            temperature=0.8,
+            max_tokens=8192,
+            top_p=0.95
         )
-        return response.choices[0].message.content
+        enhanced_content = response.choices[0].message.content
+        
+        # Verify the content actually changed
+        if enhanced_content.strip() == section_content.strip():
+            # If identical, force a second attempt with stronger instruction
+            prompt2 = f"""The previous enhancement was not sufficient. You MUST create a NEW, EXPANDED version that is SIGNIFICANTLY different from the original.
+
+Original section ({section_name}):
+{section_content}
+
+Create a COMPLETELY REWRITTEN and MUCH MORE DETAILED version with:
+- At least 50% more content
+- Specific examples and data
+- Actionable insights
+- Professional business frameworks
+- Strategic recommendations
+
+ENHANCED VERSION:"""
+            
+            response2 = client.chat.completions.create(
+                model="llama-3.3-70b-versatile",
+                messages=[
+                    {"role": "system", "content": "You are an expert business analyst. You MUST significantly expand and improve content. Never return unchanged content."},
+                    {"role": "user", "content": prompt2}
+                ],
+                temperature=0.9,
+                max_tokens=8192
+            )
+            enhanced_content = response2.choices[0].message.content
+        
+        return enhanced_content
     
     except Exception as e:
         st.error(f"Error enhancing section: {str(e)}")
@@ -1048,20 +1089,44 @@ with tab2:
                 with col1:
                     if st.button(f"💾 Save", key=f"save_{key}"):
                         st.session_state.account_plan[key] = edited_content
-                        st.success("Saved!")
                         add_research_note(f"Updated {name}")
+                        st.toast(f"✅ Saved {name}!", icon="💾")
+                        st.rerun()
                 
                 with col2:
                     if st.button(f"✨ AI Enhance", key=f"enhance_{key}"):
-                        with st.spinner("Enhancing with AI..."):
+                        with st.spinner(f"🤖 AI is enhancing {name}..."):
                             try:
+                                # First save any edits, then enhance
+                                original_content = edited_content
+                                st.session_state.account_plan[key] = edited_content
+                                
+                                # Call AI enhancement
                                 enhanced_text = enhance_section(edited_content, name)
-                                st.session_state.account_plan[key] = enhanced_text
-                                st.success(f"✅ Enhanced!")
-                                add_research_note(f"Enhanced {name}")
-                                st.rerun()
+                                
+                                # Debug: Check if content actually changed
+                                original_length = len(original_content)
+                                enhanced_length = len(enhanced_text) if enhanced_text else 0
+                                
+                                # Only update if we got a valid response
+                                if enhanced_text and enhanced_text.strip():
+                                    st.session_state.account_plan[key] = enhanced_text
+                                    add_research_note(f"✨ AI-enhanced {name} ({original_length} → {enhanced_length} chars)")
+                                    
+                                    # Show change info
+                                    if enhanced_length > original_length * 1.2:
+                                        st.toast(f"✨ Enhanced {name}! (+{enhanced_length - original_length} chars)", icon="🤖")
+                                    elif enhanced_length > original_length:
+                                        st.toast(f"✨ Enhanced {name}! (slightly improved)", icon="🤖")
+                                    else:
+                                        st.toast(f"⚠️ Enhanced {name} (no significant change)", icon="🤖")
+                                    st.rerun()
+                                else:
+                                    st.error("Enhancement returned empty content")
                             except Exception as e:
-                                st.error(f"Error enhancing: {str(e)}")
+                                st.error(f"❌ Error enhancing: {str(e)}")
+                                import traceback
+                                st.error(traceback.format_exc())
     
     else:
         st.info("👈 Start a research conversation in the Chat tab to generate an account plan!")
