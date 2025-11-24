@@ -1,118 +1,233 @@
-# Company Research Assistant (Account Plan Generator)
+# 🏢 Company Research Assistant# Company Research Assistant (Account Plan Generator)
 
-An intelligent AI-powered assistant that helps users research companies through natural conversation and generate comprehensive account plans. Built with Google Gemini AI with Google Search grounding and Streamlit.
 
-## 🎯 Features
 
-### Core Capabilities
-- **✅ Multi-Source Research**: Gathers information using **Google Search grounding** for real-time, accurate data from multiple sources
-- **✅ Interactive Conversation**: Natural dialogue with context awareness
-- **✅ Progress Updates**: Provides real-time research status and asks clarifying questions during research
-- **✅ Account Plan Generation**: Creates structured, professional account plans
-- **✅ Editable Sections**: Update ANY section of the generated plan with text areas
-- **✅ AI Enhancement**: One-click AI enhancement for each section
+An AI-powered research assistant that helps you create comprehensive account plans through natural conversation. Built with **Groq AI** (Llama 3.3 70B) and **Streamlit**.An intelligent AI-powered assistant that helps users research companies through natural conversation and generate comprehensive account plans. Built with Google Gemini AI with Google Search grounding and Streamlit.
+
+
+
+## ✨ Features## 🎯 Features
+
+
+
+- **💬 Intelligent Conversation** - Natural dialogue with context awareness### Core Capabilities
+
+- **📊 Account Plan Generation** - Structured 10-section professional plans- **✅ Multi-Source Research**: Gathers information using **Google Search grounding** for real-time, accurate data from multiple sources
+
+- **✏️ Editable Sections** - Update any section with built-in editors- **✅ Interactive Conversation**: Natural dialogue with context awareness
+
+- **🤖 AI Enhancement** - One-click AI improvement for each section- **✅ Progress Updates**: Provides real-time research status and asks clarifying questions during research
+
+- **🎤 Voice Interaction** - Speech-to-text input and text-to-speech output- **✅ Account Plan Generation**: Creates structured, professional account plans
+
+- **📥 Export Options** - Download as JSON or formatted text- **✅ Editable Sections**: Update ANY section of the generated plan with text areas
+
+- **⚡ Fast & Free** - Powered by Groq's lightning-fast API (14,400 requests/day free)- **✅ AI Enhancement**: One-click AI enhancement for each section
+
 - **✅ Voice Interaction**: Full voice mode with speech-to-text input and text-to-speech output
-- **✅ Export Options**: Download plans as JSON or formatted text
 
-### Interaction Modes
-1. **💬 Chat Mode** (Default): Type your questions and requests
-2. **🎤 Voice Mode** (Toggleable): Speak your questions, hear AI responses read aloud
-   - Speech-to-text input using Web Speech API
+## 🚀 Quick Start- **✅ Export Options**: Download plans as JSON or formatted text
+
+
+
+### 1. Install Dependencies### Interaction Modes
+
+```bash1. **💬 Chat Mode** (Default): Type your questions and requests
+
+pip install -r requirements.txt2. **🎤 Voice Mode** (Toggleable): Speak your questions, hear AI responses read aloud
+
+```   - Speech-to-text input using Web Speech API
+
    - Text-to-speech output for responses
-   - Works in Chrome, Edge, Safari
 
-### Account Plan Sections
-1. Executive Summary
-2. Company Overview (size, industry, revenue, locations)
+### 2. Set Up API Key   - Works in Chrome, Edge, Safari
+
+Create a `.env` file:
+
+```bash### Account Plan Sections
+
+GROQ_API_KEY=your_groq_api_key_here1. Executive Summary
+
+```2. Company Overview (size, industry, revenue, locations)
+
 3. Business Model & Products/Services
-4. Market Position & Competitors
+
+Get your free API key at: [https://console.groq.com/](https://console.groq.com/)4. Market Position & Competitors
+
 5. Recent News & Strategic Initiatives
-6. Key Stakeholders & Decision Makers
-7. Pain Points & Challenges
-8. Opportunities & Recommendations
-9. Engagement Strategy
+
+### 3. Run the App6. Key Stakeholders & Decision Makers
+
+```bash7. Pain Points & Challenges
+
+streamlit run main.py8. Opportunities & Recommendations
+
+```9. Engagement Strategy
+
 10. Next Steps
 
-## 🚀 Getting Started
+Or use the convenience script:
 
-### Prerequisites
+```bash## 🚀 Getting Started
+
+./start.sh
+
+```### Prerequisites
+
 - Python 3.10 or higher
-- Google Gemini API key ([Get one here](https://aistudio.google.com/app/apikey))
+
+The app will open at `http://localhost:8501`- Google Gemini API key ([Get one here](https://aistudio.google.com/app/apikey))
+
 - Modern web browser (Chrome, Edge, or Safari recommended for voice features)
+
+## 💡 Usage
 
 ### Installation
 
-1. **Clone the repository**
-```bash
-git clone <your-repo-url>
-cd eightfold
-```
-
-2. **Install dependencies**
-```bash
-pip install -r requirements.txt
-```
-
-3. **Set up environment variables**
-```bash
-cp .env.example .env
-```
-Edit `.env` and add your Gemini API key:
-```
-GEMINI_API_KEY=your_actual_api_key_here
-```
-
-4. **Run the application**
-```bash
-streamlit run main.py
-```
-Or use the convenience script:
-```bash
-./start.sh
-```
-
-The app will open in your browser at `http://localhost:8501`
-
-The app will open in your browser at `http://localhost:8501`
-
-## 💡 Usage Examples
-
 ### Basic Research
+
+```1. **Clone the repository**
+
+"Research Tesla and create an account plan"```bash
+
+```git clone <your-repo-url>
+
+cd eightfold
+
+### Focused Research```
+
 ```
-User: "Research Tesla"
-Assistant: "I'll research Tesla for you. Let me gather information about their business, recent news, and strategic initiatives..."
+
+"Create an account plan for Microsoft focused on Azure cloud services"2. **Install dependencies**
+
+``````bash
+
+pip install -r requirements.txt
+
+### Follow-up Questions```
+
 ```
+
+"Who are the key decision makers at Amazon?"3. **Set up environment variables**
+
+"What are Apple's recent AI initiatives?"```bash
+
+```cp .env.example .env
+
+```
+
+## 📋 Account Plan SectionsEdit `.env` and add your Gemini API key:
+
+```
+
+1. **Executive Summary** - High-level overview and key opportunitiesGEMINI_API_KEY=your_actual_api_key_here
+
+2. **Company Overview** - Size, industry, revenue, locations```
+
+3. **Business Model** - Products, services, revenue streams
+
+4. **Market Position** - Competitors, market share, advantages4. **Run the application**
+
+5. **Recent News** - Strategic initiatives and developments```bash
+
+6. **Key Stakeholders** - Decision makers and leadershipstreamlit run main.py
+
+7. **Pain Points** - Challenges and areas for improvement```
+
+8. **Opportunities** - Recommendations and value propositionsOr use the convenience script:
+
+9. **Engagement Strategy** - Approach and key messages```bash
+
+10. **Next Steps** - Specific action items with timelines./start.sh
+
+```
+
+## 🎤 Voice Mode
+
+The app will open in your browser at `http://localhost:8501`
+
+Enable voice mode in the sidebar for:
+
+- **Voice Input** - Speak your questions (Chrome/Edge/Safari)The app will open in your browser at `http://localhost:8501`
+
+- **Voice Output** - Listen to AI responses with adjustable playback speed
+
+- **Speed Controls** - 0.75x, 1.0x, 1.25x, 1.5x playback options## 💡 Usage Examples
+
+
+
+## 🛠️ Tech Stack### Basic Research
+
+```
+
+- **AI Model**: Llama 3.3 70B (via Groq API)User: "Research Tesla"
+
+- **Framework**: StreamlitAssistant: "I'll research Tesla for you. Let me gather information about their business, recent news, and strategic initiatives..."
+
+- **Voice**: Browser Web Speech API```
+
+- **Language**: Python 3.10+
 
 ### Focused Research
-```
-User: "Create an account plan for Microsoft focused on their Azure cloud services"
-Assistant: "I'll create a comprehensive account plan for Microsoft with emphasis on Azure. Let me search for the latest information..."
-```
 
-### Follow-up Questions
-```
-User: "Who are the key decision makers at Amazon?"
-Assistant: "I'm finding information about Amazon's leadership team. Should I focus on corporate leadership, AWS executives, or retail division leaders?"
+## 📦 Project Structure```
+
+User: "Create an account plan for Microsoft focused on their Azure cloud services"
+
+```Assistant: "I'll create a comprehensive account plan for Microsoft with emphasis on Azure. Let me search for the latest information..."
+
+eightfold/```
+
+├── main.py              # Main application
+
+├── requirements.txt     # Python dependencies### Follow-up Questions
+
+├── .env                # API keys (not in git)```
+
+├── .env.example        # Template for environment variablesUser: "Who are the key decision makers at Amazon?"
+
+├── start.sh            # Convenience startup scriptAssistant: "I'm finding information about Amazon's leadership team. Should I focus on corporate leadership, AWS executives, or retail division leaders?"
+
+└── README.md           # This file```
+
 ```
 
 ## 👥 User Scenarios Handled
 
+## 🔒 Security
+
 ### 1. The Confused User
-**Behavior**: Unsure what they want, vague requests
 
-**How we handle it**:
+- Never commit `.env` file (already in `.gitignore`)**Behavior**: Unsure what they want, vague requests
+
+- Keep your API keys private
+
+- Regenerate keys if accidentally exposed**How we handle it**:
+
 - Ask clarifying questions gently
-- Provide examples and suggestions
-- Guide them step-by-step
-- Offer predefined templates
 
-**Example**:
+## 📝 License- Provide examples and suggestions
+
+- Guide them step-by-step
+
+This project is for educational and professional use.- Offer predefined templates
+
+
+
+## 🤝 Contributing**Example**:
+
 ```
-User: "I need some company information"
+
+Feel free to fork, improve, and submit pull requests!User: "I need some company information"
+
 Assistant: "I'd be happy to help! Could you tell me which company you're interested in? 
-And what specifically would you like to know - are you looking to:
+
+---And what specifically would you like to know - are you looking to:
+
 - Research a potential client/partner?
-- Analyze competitors?
+
+**Built with ❤️ using Groq AI and Streamlit**- Analyze competitors?
+
 - Prepare for a sales pitch?
 This will help me provide the most relevant information."
 ```

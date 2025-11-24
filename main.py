@@ -761,13 +761,13 @@ with tab1:
                         tts_html = f"""
                         <div style="margin: 15px 0; padding: 20px; background-color: #f0f2f6; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
                             <div style="margin-bottom: 15px;">
-                                <button id="playBtn_{response_id}" onclick="playTTS_{response_id}()" 
+                                <button id="playBtn_{response_id}" 
                                     style="background-color: #4CAF50; color: white; border: none; padding: 14px 28px; 
                                     border-radius: 8px; cursor: pointer; font-size: 16px; margin-right: 10px; 
                                     font-weight: 600; transition: all 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
                                     ▶️ Play Audio
                                 </button>
-                                <button id="stopBtn_{response_id}" onclick="stopTTS_{response_id}()" 
+                                <button id="stopBtn_{response_id}" 
                                     style="background-color: #f44336; color: white; border: none; padding: 14px 28px; 
                                     border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: 600; 
                                     transition: all 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
@@ -779,22 +779,22 @@ with tab1:
                                     🎚️ Playback Speed:
                                 </label>
                                 <br>
-                                <button onclick="setSpeed_{response_id}(0.75)" id="speed075_{response_id}"
+                                <button id="speed075_{response_id}"
                                     style="background-color: #e0e0e0; border: 2px solid #999; padding: 8px 14px; 
                                     border-radius: 5px; cursor: pointer; font-size: 13px; margin: 3px;">
                                     🐢 0.75x
                                 </button>
-                                <button onclick="setSpeed_{response_id}(1.0)" id="speed10_{response_id}"
+                                <button id="speed10_{response_id}"
                                     style="background-color: #4CAF50; border: 2px solid #2e7d32; color: white; padding: 8px 14px; 
                                     border-radius: 5px; cursor: pointer; font-size: 13px; margin: 3px; font-weight: 600;">
                                     ✓ 1.0x
                                 </button>
-                                <button onclick="setSpeed_{response_id}(1.25)" id="speed125_{response_id}"
+                                <button id="speed125_{response_id}"
                                     style="background-color: #e0e0e0; border: 2px solid #999; padding: 8px 14px; 
                                     border-radius: 5px; cursor: pointer; font-size: 13px; margin: 3px;">
                                     ⚡ 1.25x
                                 </button>
-                                <button onclick="setSpeed_{response_id}(1.5)" id="speed15_{response_id}"
+                                <button id="speed15_{response_id}"
                                     style="background-color: #e0e0e0; border: 2px solid #999; padding: 8px 14px; 
                                     border-radius: 5px; cursor: pointer; font-size: 13px; margin: 3px;">
                                     🚀 1.5x
@@ -804,7 +804,22 @@ with tab1:
                         </div>
                         <script>
                             (function() {{
-                                console.log('TTS Script loaded for response {response_id}');
+                                console.log('=== TTS Script {response_id} Initializing ===');
+                                
+                                const playBtn = document.getElementById('playBtn_{response_id}');
+                                const stopBtn = document.getElementById('stopBtn_{response_id}');
+                                const statusDiv = document.getElementById('status_{response_id}');
+                                const speed075 = document.getElementById('speed075_{response_id}');
+                                const speed10 = document.getElementById('speed10_{response_id}');
+                                const speed125 = document.getElementById('speed125_{response_id}');
+                                const speed15 = document.getElementById('speed15_{response_id}');
+                                
+                                if (!playBtn || !stopBtn || !statusDiv) {{
+                                    console.error('TTS buttons not found for {response_id}!');
+                                    return;
+                                }}
+                                
+                                console.log('✓ All TTS elements found for {response_id}');
                                 
                                 let utterance_{response_id} = null;
                                 let currentSpeed_{response_id} = 1.0;
@@ -812,55 +827,62 @@ with tab1:
                                 
                                 // Check browser support immediately
                                 if (!('speechSynthesis' in window)) {{
-                                    document.getElementById('status_{response_id}').innerHTML = '❌ Text-to-speech not supported in this browser. Please use Chrome, Edge, or Safari.';
-                                    document.getElementById('playBtn_{response_id}').disabled = true;
-                                    document.getElementById('playBtn_{response_id}').style.opacity = '0.5';
+                                    statusDiv.innerHTML = '❌ Text-to-speech not supported in this browser. Please use Chrome, Edge, or Safari.';
+                                    playBtn.disabled = true;
+                                    playBtn.style.opacity = '0.5';
+                                    playBtn.style.cursor = 'not-allowed';
+                                    console.error('Speech Synthesis not supported');
                                     return;
-                                }} else {{
-                                    document.getElementById('status_{response_id}').innerHTML = '✅ Ready to play. Click the Play button above.';
                                 }}
                                 
-                                window.setSpeed_{response_id} = function(speed) {{
+                                console.log('✓ Speech Synthesis available');
+                                statusDiv.innerHTML = '✅ Ready to play. Click Play Audio button above.';
+                                
+                                function setSpeed(speed) {{
                                     console.log('Setting speed to:', speed);
                                     currentSpeed_{response_id} = speed;
                                     
-                                    // Update all speed button styles
-                                    const speedButtons = ['speed075_{response_id}', 'speed10_{response_id}', 'speed125_{response_id}', 'speed15_{response_id}'];
-                                    const speedValues = [0.75, 1.0, 1.25, 1.5];
-                                    
-                                    speedButtons.forEach((btnId, idx) => {{
-                                        const btn = document.getElementById(btnId);
+                                    // Update button styles
+                                    [speed075, speed10, speed125, speed15].forEach(btn => {{
                                         if (btn) {{
-                                            if (speedValues[idx] === speed) {{
-                                                btn.style.backgroundColor = '#4CAF50';
-                                                btn.style.borderColor = '#2e7d32';
-                                                btn.style.color = 'white';
-                                                btn.style.fontWeight = '600';
-                                            }} else {{
-                                                btn.style.backgroundColor = '#e0e0e0';
-                                                btn.style.borderColor = '#999';
-                                                btn.style.color = '#000';
-                                                btn.style.fontWeight = 'normal';
-                                            }}
+                                            btn.style.backgroundColor = '#e0e0e0';
+                                            btn.style.borderColor = '#999';
+                                            btn.style.color = '#000';
+                                            btn.style.fontWeight = 'normal';
                                         }}
                                     }});
                                     
-                                    document.getElementById('status_{response_id}').innerHTML = '✓ Speed set to ' + speed + 'x';
+                                    // Highlight selected
+                                    let selectedBtn = null;
+                                    if (speed === 0.75) selectedBtn = speed075;
+                                    else if (speed === 1.0) selectedBtn = speed10;
+                                    else if (speed === 1.25) selectedBtn = speed125;
+                                    else if (speed === 1.5) selectedBtn = speed15;
+                                    
+                                    if (selectedBtn) {{
+                                        selectedBtn.style.backgroundColor = '#4CAF50';
+                                        selectedBtn.style.borderColor = '#2e7d32';
+                                        selectedBtn.style.color = 'white';
+                                        selectedBtn.style.fontWeight = '600';
+                                    }}
+                                    
+                                    statusDiv.innerHTML = '✓ Speed set to ' + speed + 'x';
                                     
                                     // If currently playing, restart with new speed
                                     if (isPlaying_{response_id} && window.speechSynthesis.speaking) {{
                                         window.speechSynthesis.cancel();
                                         setTimeout(function() {{
-                                            window.playTTS_{response_id}();
+                                            playAudio();
                                         }}, 150);
                                     }}
-                                }};
+                                }}
                                 
-                                window.playTTS_{response_id} = function() {{
-                                    console.log('Play button clicked');
+                                function playAudio() {{
+                                    console.log('>>> Play button clicked for {response_id} >>>');
                                     
                                     if (!('speechSynthesis' in window)) {{
-                                        document.getElementById('status_{response_id}').innerHTML = '❌ Speech synthesis not available';
+                                        statusDiv.innerHTML = '❌ Speech synthesis not available';
+                                        console.error('Speech synthesis not available');
                                         return;
                                     }}
                                     
@@ -869,10 +891,12 @@ with tab1:
                                         window.speechSynthesis.cancel();
                                         
                                         const text = {safe_text};
-                                        console.log('Text to speak:', text.substring(0, 100));
+                                        console.log('Text to speak (first 100 chars):', text.substring(0, 100));
+                                        console.log('Text length:', text.length);
                                         
                                         if (!text || text.trim() === '') {{
-                                            document.getElementById('status_{response_id}').innerHTML = '❌ No text to speak';
+                                            statusDiv.innerHTML = '❌ No text to speak';
+                                            console.error('No text provided');
                                             return;
                                         }}
                                         
@@ -883,59 +907,73 @@ with tab1:
                                         utterance_{response_id}.lang = 'en-US';
                                         
                                         utterance_{response_id}.onstart = function() {{
-                                            console.log('Speech started');
+                                            console.log('✓ Speech STARTED for {response_id}');
                                             isPlaying_{response_id} = true;
-                                            document.getElementById('status_{response_id}').innerHTML = '🔊 Playing at ' + currentSpeed_{response_id} + 'x speed... (' + Math.round(text.length / currentSpeed_{response_id} / 15) + 's estimated)';
-                                            document.getElementById('playBtn_{response_id}').style.opacity = '0.6';
-                                            document.getElementById('playBtn_{response_id}').style.transform = 'scale(0.95)';
+                                            const estimatedTime = Math.round(text.length / currentSpeed_{response_id} / 15);
+                                            statusDiv.innerHTML = '🔊 <b>Playing</b> at ' + currentSpeed_{response_id} + 'x speed... (~' + estimatedTime + 's)';
+                                            playBtn.style.opacity = '0.6';
+                                            playBtn.style.transform = 'scale(0.95)';
                                         }};
                                         
                                         utterance_{response_id}.onend = function() {{
-                                            console.log('Speech ended');
+                                            console.log('✓ Speech ENDED for {response_id}');
                                             isPlaying_{response_id} = false;
-                                            document.getElementById('status_{response_id}').innerHTML = '✅ Audio finished playing';
-                                            document.getElementById('playBtn_{response_id}').style.opacity = '1';
-                                            document.getElementById('playBtn_{response_id}').style.transform = 'scale(1)';
+                                            statusDiv.innerHTML = '✅ Audio finished playing';
+                                            playBtn.style.opacity = '1';
+                                            playBtn.style.transform = 'scale(1)';
                                         }};
                                         
                                         utterance_{response_id}.onerror = function(event) {{
-                                            console.error('Speech error:', event);
+                                            console.error('Speech ERROR for {response_id}:', event.error, event);
                                             isPlaying_{response_id} = false;
-                                            let errorMsg = '❌ Error: ';
+                                            let errorMsg = '❌ <b>Error:</b> ';
                                             if (event.error === 'not-allowed') {{
                                                 errorMsg += 'Permission denied. Check browser settings.';
                                             }} else if (event.error === 'network') {{
-                                                errorMsg += 'Network error. Check your connection.';
+                                                errorMsg += 'Network error. Check connection.';
+                                            }} else if (event.error === 'synthesis-failed') {{
+                                                errorMsg += 'Synthesis failed. Try again.';
                                             }} else {{
                                                 errorMsg += event.error;
                                             }}
-                                            document.getElementById('status_{response_id}').innerHTML = errorMsg;
-                                            document.getElementById('playBtn_{response_id}').style.opacity = '1';
-                                            document.getElementById('playBtn_{response_id}').style.transform = 'scale(1)';
+                                            statusDiv.innerHTML = errorMsg;
+                                            playBtn.style.opacity = '1';
+                                            playBtn.style.transform = 'scale(1)';
                                         }};
                                         
-                                        document.getElementById('status_{response_id}').innerHTML = '⏳ Starting playback...';
+                                        statusDiv.innerHTML = '⏳ Starting playback...';
+                                        console.log('Calling speechSynthesis.speak()...');
                                         window.speechSynthesis.speak(utterance_{response_id});
                                         
                                     }} catch (error) {{
-                                        console.error('Exception in playTTS:', error);
-                                        document.getElementById('status_{response_id}').innerHTML = '❌ Error: ' + error.message;
+                                        console.error('Exception in playAudio:', error);
+                                        statusDiv.innerHTML = '❌ Error: ' + error.message;
                                     }}
-                                }};
+                                }}
                                 
-                                window.stopTTS_{response_id} = function() {{
-                                    console.log('Stop button clicked');
+                                function stopAudio() {{
+                                    console.log('>>> Stop button clicked for {response_id} >>>');
                                     
                                     if ('speechSynthesis' in window) {{
                                         window.speechSynthesis.cancel();
                                         isPlaying_{response_id} = false;
-                                        document.getElementById('status_{response_id}').innerHTML = '⏹️ Audio stopped';
-                                        document.getElementById('playBtn_{response_id}').style.opacity = '1';
-                                        document.getElementById('playBtn_{response_id}').style.transform = 'scale(1)';
+                                        statusDiv.innerHTML = '⏹️ Audio stopped';
+                                        playBtn.style.opacity = '1';
+                                        playBtn.style.transform = 'scale(1)';
+                                        console.log('✓ Audio stopped');
                                     }}
-                                }};
+                                }}
                                 
-                                console.log('TTS functions registered for response {response_id}');
+                                // Attach event listeners
+                                playBtn.addEventListener('click', playAudio);
+                                stopBtn.addEventListener('click', stopAudio);
+                                
+                                if (speed075) speed075.addEventListener('click', function() {{ setSpeed(0.75); }});
+                                if (speed10) speed10.addEventListener('click', function() {{ setSpeed(1.0); }});
+                                if (speed125) speed125.addEventListener('click', function() {{ setSpeed(1.25); }});
+                                if (speed15) speed15.addEventListener('click', function() {{ setSpeed(1.5); }});
+                                
+                                console.log('=== TTS Script {response_id} Ready ===');
                             }})();
                         </script>
                         """
