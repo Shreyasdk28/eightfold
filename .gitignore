@@ -1,0 +1,26 @@
+# Environment
+.env
+*.pyc
+__pycache__/
+venv/
+env/
+.venv/
+
+# Interview sessions
+interview_logs/
+*.json
+
+# Audio files
+*.wav
+*.mp3
+temp_audio/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
